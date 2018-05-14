@@ -14,7 +14,7 @@
 	<!-- meta character set -->
 	<meta charset="UTF-8">
 	<!-- Site Title -->
-	<title>Map</title>
+	<title>REL 360 Final Project</title>
 
 	<link href="https://fonts.googleapis.com/css?family=Poppins:300,500,600" rel="stylesheet">
 		<!--
@@ -35,16 +35,17 @@
 				<div class="container">
 					<div class="header-content d-flex justify-content-between align-items-center">
 						<div class="logo">
-							<h3 class="text-uppercase text-white">Mapping Catholic Schools</h3>
+							<h3 class="text-uppercase text-white">REL 360 Final Project</h3>
 						</div>
 						<div class="right-bar d-flex align-items-center">
 							<nav class="d-flex align-items-center">
 								<ul class="main-menu">
 									<li><a href="#top">Top</a></li>
-									<li><a href="#services">Map</a></li>
-									<li><a href="#highlight1">Highlight 1</a></li>
-									<li><a href="#highlight2">Highlight 2</a></li>
-									<li><a href="#team">Sources</a></li>
+									<li><a href="#map">Map</a></li>
+									<li><a href="#seton_and_carroll">Seton and Carroll</a></li>
+									<li><a href="#lange_and_joubert">Lange and Joubert</a></li>
+									<li><a href="#comparison">Comparison</a></li>
+									<li><a href="#sources">Sources</a></li>
 								</ul>
 								<a href="#" class="mobile-btn"><span class="lnr lnr-menu"></span></a>
 							</nav>
@@ -62,7 +63,7 @@
 					<div class="col-lg-8">
 						<div class="banner-content text-center">
 							<p class="text-uppercase text-white">REL 360 Final Project</p>
-							<h1 class="text-uppercase text-white">Mapping Catholic Schools in the 19th Century</h1>
+							<h1 class=" text-white">Examining 19th Century Schools Founded by the Sisters of Charity and Oblate Sisters of Providence</h1>
 						</div>
 					</div>
 				</div>
@@ -74,9 +75,9 @@
 			<div class="container">
 				<div class="row justify-content-center">
 					<div class="col-lg-10">
-						<div class="section-title text-center">
-							<p class="text-uppercase">About the project</p>
-							<h3>This project follows.....blahblah</h3>
+						<div class="section-title">
+							<p class="text-uppercase text-center">About the project</p>
+							<p>This final project for REL 360 examines the legacies of two women: Elizabeth Ann Bayley Seton and Elizabeth Lange. Seton founded the Sisters of Charity of St. Joseph in 1809 with a mission of educating the poor, which branched into multiple independent Sisters of Charity orders. Lange founded the Oblate Sisters of Providence in 1829 to educate black Catholic children. This page includes a map of schools established in the 19th century by the Oblate Sisters of Providence, the Sisters of Charity of St. Joseph, and the offshoots of the original Sisters of Charity. It also examines the importance of each woman's relationships and struggles with their male superiors and compares the impact of those relationships on each order. </p>
 						</div>
 					</div>
 				</div>
@@ -84,15 +85,16 @@
 		</section>
 		<!-- End About/main essay Area -->
 		<!-- Start MAP Area -->
-		<section id="services" class="pb-150">
+		<section id="map" class="pb-150">
 			<div class="container">
 				<div class="row justify-content-center">
-						<div class="product-area-title text-center">
+						<div class="">
 							<p class="text-black text-uppercase"></p>
-							<h2 class="text-black h1">MAP</h2>
+							<h2 class="text-black text-center h1">Map</h2>
+							<p class="text-black"><br>The map displays 38 schools, each established by one of the six orders listed below in the 19th century. While it is not an exhaustive list of all schools founded, it features many of the most prominent schools founded by each order during the century.</p>
 						</div>
 						<div class="legend1">
-						  <h3>Order Legend</h3>
+						  <h3>Legend of Orders</h3>
 						  <div class="legend1"> <p class="country-name"><span class="key-dot order2"></span>Oblate Sisters of Providence</p> </div>
 					     <div class="legend1"> <p class="country-name"><span class="key-dot order1"></span>Sisters of Charity of St. Joseph</p> </div>
 					     <div class="legend1"> <p class="country-name"><span class="key-dot order3"></span>Sisters of Charity of Cincinnati</p> </div>
@@ -106,9 +108,12 @@
 						  <button id="zoom_in" type="button" class="btn btn-light">+</button>
 						  <button id="zoom_out" type="button" class="btn btn-light">-</button>
 						</div>
+						
+						<label><input id='timeline' style="width:240px;" type="range" min="1810" max="1899" step="1" value="1899"></label>
+						<span id="slideryear">Year: <span id="year">1899</span></span>
 				</div>
 				<div>
-					<h4 id="maptitle">Click on the points to find out more information about each order.</h4>
+					<h4 id="maptitle">Click on the pins to see information about each school.</h4>
 					<p id="mapinfo">
 					</p>
 				</div>
@@ -118,20 +123,50 @@
 		<!-- Start Highlight Area -->
 		<section class="section-full gray-bg">
 			<div class="container">
-				<div class="row justify-content-center" id='highlight1'>
+				<div class="row justify-content-center" id='seton_and_carroll'>
 					<div class="col-lg-10">
-						<div class="section-title text-center">
-							<p class="text-uppercase">About the project</p>
-							<h3>This project follows.....blahblah</h3>
+						<div class="section-title">
+							<p class="text-uppercase text-center">Seton and Carroll</p>
+							<p class="text-black">
+The following essay examines the relationship of Elizabeth Seton and Archbishop John Carroll as she founds the Sisters of Charity of St. Joseph and their first school, Saint Joseph's Academy and Free School.
+<br><br>
+Elizabeth Ann Bayley Seton led the Sisters of Charity in establishing Saint Joseph's Academy and Free School in Emmitsburg, Maryland in 1810. It was the first free Catholic American school for girls staffed by religious women, coming well before the Catholic parochial system that became popular in the mid 19th century (McNeil, "Historical Perspectives" 286, 294). While the school became successful, its first few years under the leadership of Seton were filled with trials. An examination of eight letters from Seton to the Archbishop John Carroll, the current leader of the American Catholic church (Bechtle and Metz 26), from August 1809 to September 1811 highlight her struggles, particularly regarding her disagreements with her Superiors and her opinions regarding new regulation of the Sisters. Additionally, the language Seton uses in her letters is of particular interest, as she balances expressing her opinion and acknowledging the superiority of Archbishop Carroll. Investigating these letters give insights into the difficulties of a Catholic woman and eventual Saint negotiating leadership, subordinance and motherhood while following her calling to education.
+Born as Elizabeth Ann Bayley in New York in 1774, Seton married William Magee Seton in 1974. William Seton died in December 1803, leaving Elizabeth Seton widowed with five children (McNeil, "Historical Perspectives" 284). In the following years, Seton struggled to maintain the finances to support her children and converted from the Episcopal Church to Catholicism (288). In June of 1808, Elizabeth and her children moved to Baltimore, Maryland where she opened a Catholic school (291). A year later, she moved to Emmitsburg, Maryland to establish the Sisters of Charity and begin her calling to educate the poor (294). In Emmitsburg, she used her experiences as a teacher and headmistress to establish the Academy, lead the Sisters, and ensure financial stability and education for her children.
+<br><br>
+The examined letters to Archbishop Carroll begin soon after she arrives in Emmitsburg and immediately mention the hardship she endures. In her first letter to the Archbishop after arriving, Seton remarks she has yet to write to him because "so many things occurred to disappoint and distress me it was impossible to say any thing that would not give you more pain than pleasure" (Seton 76). While she is explaining the delay in her letter, it makes one wonder if she had an explicit purpose of mentioning such distress outside of maintaining honest relations with Archbishop Carroll. In a later letter, she mentions their work causing "pain in the breast and side" (142) in most of the Sisters, continuing "but this I only tell you as our chief Shepherd" (142, emphasis in original). Here, she tells Archbishop Carroll she informs him due to his position, with no expectation of action. She continues to mention that their Superior at St. Joseph's "never thinks any sickness worth minding till the Doctor gives over" (142). While she describes this as fortunate, as it gives the Sisters courage, one might wonder if she is implying that their Superior downplays and ignores their illness. She continues to mention her own illness in another letter, saying that the Sisters are so busy with students that they do not have time for the sick, and luckily the "Lord fits the back for the burden" (165, emphasis in original). This mentioning of sickness shows the Sisters as resilient through their faith, perhaps to signify their strength to Archbishop Carroll. While there may have been multiple motives for her mentioning of hardship and sickness, they demonstrate an intimacy in their relationship that allows Seton to be forthcoming about the Sisters' circumstances. These instances show the disappointments, excess work, and constant illness that plagued Seton's first years in Emmitsburg, which must have been severe enough to warrant mentioning in a letter to her highest superior.
+<br><br>
+While Seton was the head of the Sisters, she answered to a male Superior the presided over the community but had frequent disagreements with her Superiors in the first two years. This begins almost immediately upon arrival, as she tells Carroll in her first letter that the sisters are "greatly chagrined" due to their Superior William Dubourg's letter informing the Sisters to stop correspondence with Reverend Babade in Baltimore (77). In Baltimore, Babade was their spiritual leader and particularly dear to Seton, plus Dubourg and Babade did not get along (Bechtle and Metz 26). She describes Dubourg as "acting like a tyrant" in imposing this "severe regulation" and causing her heart to be "torn to pieces" (Seton 77). The situation resolves itself when Dubourg changes the rule to allow them to write once every two months, but Seton remarks "If this had been understood at first, much uneasiness would have been spared" (77). Thus, despite the resolution of the problem, Seton felt it was necessary to mention it to Carroll due to the distress they needlessly endured. Some disagreement likely continued and contributed to Dubourg's resigning as superior in late September of 1809, after only a few months of service (Bechtle and Metz 28). 
+<br><br>
+Problems continued with the new Superior Reverend John David and his strong image for the school. When Seton writes Carroll on January 25, 2010, she seems exasperated with the situation, saying she has "an unconquerable reluctance and diffidence" towards him despite having "endeavoured to do every thing in my power to bend myself to meet the last appointed Superior in every way" (106-7). Despite her imploring Carroll for a change, David continues to be superior until May 1811 (Bechtle and Metz 33). That month, she writes Carroll regarding his choice to appoint a new superior, remarking that for two years she has not been able "to meet the views of the Rev. gentlemen who have the government of this house" (Seton 184). Thus, throughout the period Seton and her Superiors clashed over their plans and visions for St. Joseph's, constantly placing her in difficult positions as the inferior. Despite this, Seton voices her opinions regarding the new superior in an attempt to assure future harmony. Though Seton remained in the inferior position, her voicing of disagreement to Archbishop Carroll shows her willingness to take initiative to change her situation and use her relationship to her advantage.
+<br><br>
+During the first years of the Sisters of Charity, their daily activities were governed by a sparse document penned by one of the Sisters, Provisional Regulations for the St. Joseph Sisters (Seton 737). In her letters, Seton remarks their occasional difficulties in observing some of the regulations, such as the morning silence between breakfast and lunch, especially when their new location is under construction in early 1810 (Seton 77, 106, 738). During this time, there were discussions to create more thorough regulations modeled off of the French Common Rules of the Daughters of Charity that they received in 1810 (McNeil, "Historical Perspectives" 295). After a series of revisions, the new regulations called Common Rules of the Daughters of Charity in America were approved by Archbishop Carroll in 1812 (McNeil, "Historical Perspectives" 295). During the time of revision, Seton openly expressed her opinions to Carroll and succeeded in altering the regulations to allow her to remain the guardian of her children (McNeil "Journal" 22). As they are being discussed in September of 1810, she makes it clear the discussion must be thorough: "certainly if any are proposed to us without going thro' the necessary discussion and approbation I can never give the example of Accepting them" (158). While Seton is often subtler with her opinions, her boldness in claiming she will never accept the regulations is notable. As so much is at stake for her as a mother, her clear, sharp statement makes sense. In a May 1811 letter, she calls motherhood "so sacred a right" when she questions "how can they allow me the uncontrolled privileges of a Mother to my five darlings?" (185). In September 1811, she states she would "gladly make every sacrifice you think consistant with my first and inseperable obligations as a Mother" (196). In both of these instances by asking questions and appealing to what Carroll thinks, Seton carefully leaves the decision and power in Carroll's hand while appealing to his emotions with her pleads to her "sacred" and "inseperable" role as a mother. This method of both exercising her opinion while not undermining Carroll's authority was surely effective in helping secure her guardianship over her children with the revisions to the new regulations.
+<br><br>
+Throughout her correspondence with Carroll, Seton's language shows she is careful not to overstep her bounds and interfere with Carroll's authority. She goes to great lengths to explain her reasons for bringing up any opinion or complaint, often apologizing for her extra detail or placing herself at fault for something. She finishes her first letter from Emmitsburg by asking Carroll "can you will you forgive all this detail, pity a creature so weak and imperfect" (79). She perhaps apologizes for the presumed female fault of verboseness and degrades herself after she brought up the fault of her superior. This degradation and appeal balances her overstepping of bounds to criticize someone above her. In another instance of disagreeing with her superior, she begins by placing herself at fault and explains she is only mentioning the situation because it is "absolutely necessary" (106) for the functioning of the community. After her strong statement threatening to possibly reject the regulations under revision in the September 2010 letter, she apologizes, explains her reasoning, and signs off with a particularly complimentary post script "It is useless to tell you my our Father that every individual here young and old reveres you with devoted affection" (158). Thus, when Seton makes one of the boldest statements in her letters, she compensates by reassuring him of his reverence by the Sisters. Finally, when she mentions the necessity that she remains a mother under the new regulations, she is particularly expressive of his control over her: "I cast all at the feet of the Adored, placing every consideration and all my concerns in your hands as his Representative to decide my fate" (195). Again, she realigns the power and authority with Carroll. While Seton openly expresses her feelings regarding her superiors and her desires regarding the new regulations, she does so in a way that maintains and confirms the power of Archbishop Carroll. 
+<br><br>
+Examining selected correspondence between Elizabeth Seton and Archbishop Carroll helps highlight the difficulties in the first years of establishing the Sisters of Charity and St. Joseph's Academy. While there were likely many other issues, especially regarding the curriculum and students of the Academy, this particularly explores Seton's position as the new leader of the community. Her primary problems revolved around clashes with her superiors and concerns as a mother. By towing the line between expressing her opinions and confirming Carroll's superiority and power, Seton's voice was heard by the most powerful man in American Catholicism at the time. Thus, the exploration illuminates some of the challenges of balancing motherhood and religious calling in the early 19th century America and how one woman effectively used her voice to influence those around her in pursuit of her goals.
+							</p>
 						</div>
 					</div>
 				</div>
 				<hr></hr>
-				<div class="row justify-content-center" id='highlight2'>
+				<div class="row justify-content-center" id='lange_and_joubert'>
 					<div class="col-lg-10">
-						<div class="section-title text-center">
-							<p class="text-uppercase">About the project</p>
-							<h3>This project follows.....blahblah</h3>
+						<div class="section-title">
+							<p class="text-uppercase text-center">Lange and Joubert</p>
+							<p class="text-black">
+The following essay examines the relationship of Elizabeth Lange and Father James Joubert as they found the Oblate Sisters of Providence and their first school, St. Frances Academy.
+<br><br>
+Essay text...
+							</p>
+						</div>
+					</div>
+				</div>
+				<hr></hr>
+				<div class="row justify-content-center" id='comparison'>
+					<div class="col-lg-10">
+						<div class="section-title">
+							<p class="text-uppercase text-center">Comparison</p>
+							<p class="text-black"> Nice 3 page paper! </p>
 						</div>
 					</div>
 				</div>
@@ -140,7 +175,7 @@
 		<!-- End Highlight Area -->
 
 		<!-- Start Source member Area -->
-		<section id="team" class="pb-150">
+		<section id="sources" class="pb-150">
 			<div class="container">
 				<div class="row justify-content-center">
 					<div class="col-lg-8">
@@ -149,9 +184,9 @@
 							<h2 class="h1">Sources</h2>
 						</div>
 						<p>
-							<li>
-								<ul> Source 1 </ul>
-							</li>
+							Source 1
+							<br>
+							Source 2
 						</p>
 					</div>
 				</div>
@@ -161,28 +196,6 @@
 
 		<footer class="section-full">
 			<div class="container">
-				<div class="row">
-					<div class="col-lg-3 col-sm-6">
-						<div class="single-footer-widget">
-							<h6 class="text-white text-uppercase mb-20">About the project</h6>
-							<p>This is the final project for REL 360. </p>
-						</div>
-					</div>
-					<div class="col-lg-3 col-sm-6">
-						<div class="single-footer-widget">
-							<h6 class="text-white text-uppercase mb-20">Navigation Links</h6>
-							<div class="d-flex">
-								<ul class="footer-nav">
-									<li><a href="#top">Top</a></li>
-									<li><a href="#services">Map</a></li>
-									<li><a href="#highlight1">Highlight 1</a></li>
-									<li><a href="#highlight2">Highlight 2</a></li>
-									<li><a href="#team">Sources</a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
 				<div class="footer-bottom d-flex justify-content-between align-items-center">
 					<p class="footer-text m-0">Copyright &copy; 2017  |  All rights reserved to <a href="#">Datarc inc.</a> Designed by <a href="https://colorlib.com/wp">Colorlib</a>.</p>
 				</div>

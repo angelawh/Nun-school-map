@@ -1,4 +1,3 @@
-
 // Customizable variables
 
 // Key variables
@@ -61,6 +60,7 @@ var stateIdMap = d3.map();
 var countyIdMap = d3.map();
 var keys;
 var zoom;
+var orders;
 var oldicon = null;
 
 function generate() {
@@ -110,6 +110,13 @@ function loadData(callback) {
 	});
 }
 
+function loadOrders(callback) {   
+	d3.csv("/data/orders.csv", function(d) { 
+		orders = d;
+		callback(null);
+	});
+}
+
 function makeVisualizations() { 
 	zoom = d3.zoom().scaleExtent([minZoomScale, maxZoomScale])
 		.on("zoom", zoomIn);
@@ -119,6 +126,7 @@ function makeVisualizations() {
 	if (data == null) {
 		d3.queue()
 			.defer(loadData)
+			.defer(loadOrders)
 		.await(getAndDrawUSforPoints)
 	} else {
 		getAndDrawUSforPoints();
@@ -133,6 +141,16 @@ function zoomIn() {
 	g.selectAll("text")
 		.attr('font-size', radiusFunction)
 		.attr('stroke-width', outlineFunction);
+	if (oldicon == null) return;
+	d3.select(oldicon).attrs({
+		'stroke-width': function(d) {
+			return outlineFunction(d) * 1.5;
+		},
+		'font-size': function(d) {
+			return radiusFunction(d) * 1.5;
+		},
+		stroke: "red",
+	});
 }
 
 
@@ -176,9 +194,6 @@ function selecticon(icon, data, i) {
 }
 
 function seticontext(d, i) {
-	console.log(d);
-	console.log(i);
-	var text = formtext(d);
 	d3.select('#maptitle').text(d["School name"]);
 	var map = d3.select('#mapinfo');
 	map.html("");
@@ -210,34 +225,27 @@ function seticontext(d, i) {
 
 	map.append('p')
 		.text("Sources: " + d["Sources"]);
+
+	var o = orders[d["Order ID"]-1];
+
+	map.append('h5')
+		.text("About the " + o["Order name"]);
+
+	map.append('p')
+		.text("Date order founded: " + o["Date order founded"])
+		.append('p')
+		.text("Location of founding: " + o["Location"])
+		.append('p')
+		.text("Foundress: " + o["Order founder"]);
+
+	map.append('p')
+		.text(o["Description of order"]);
+
+	map.append('p')
+		.text("Sources: " + o["Website/Sources"]);
 }
 
-function formtext(d) {
-	"xDate school founded"
-	"xFounder/Foundress"
-	"xLocation"
-	"xOrder Name"
-	"School description"
-	"Sources"
-	"Type of students taught"
-	"xYear founded"
-	"xYear school ended [if applicable]"
-	d["Sources"].replace(',', '\n')
-
-	var text = "Order: " + d["Order Name"] + '\n';
-	if (d["Founder/Foundress"] != "") 
-		text += "Foundress: " + d["Founder/Foundress"] + "\n\n";
-	else text += "\n";
-
-	text += "Date school founded: " + d["Date school founded"] 
-			+ "\nDate school ended: " 
-			+ d["Year school ended [if applicable]"] + "\n\n";
-
-
-
-	return text;
-}
-
+var textAttributes;
 function drawPoints() {
 	var colorRange = d3.scaleOrdinal()
 		.domain([1,6,2,3,4,5])//d3.map(data, function(d) {return (d[pointColorKey])}).keys()) // this may be wrong
@@ -261,7 +269,7 @@ function drawPoints() {
 		fill: fillfunction,
 	}
 
-	var textAttributes = {
+	textAttributes = {
 		x: function (d) { 
 			var coords = [d[longColKey], d[latColKey]];
 			return projection(coords)[0]; 
@@ -273,7 +281,6 @@ function drawPoints() {
 		opacity: pointOpacity,
 		"stroke-width": pointOutlineWidth,
 		stroke: pointOutlineColor,
-		//r: radiusFunction,
 		fill: fillfunction,
 		'font-family': 'FontAwesome',
 		'font-size': function (d) { return d.size+'em'},
@@ -291,37 +298,21 @@ function drawPoints() {
 	    .on("mouseover", function(d, i) {
 	    	if (this == oldicon) return;
 		    	d3.select(this).attrs({
-		    		//fill: "orange",
   					'font-size': function(d) {
   						return radiusFunction(d) * 1.5;
   					}
   				});
-  				/*var xPosition = d3.mouse(this)[0];
-                var yPosition = d3.mouse(this)[1];
 
-                svg.append("text")
-                    .attr("id", "tooltip")
-                    .attr("x", xPosition)
-                    .attr("y", yPosition)
-                    .attr("text-anchor", "middle")
-                    .attr("font-family", "sans-serif")
-                    .attr("font-size", "11px")
-                    .attr("font-weight", "bold")
-                    .attr("fill", "black")
-                    //.text(d["Order Name"] + ", " + d['Location']);*/
 		    })
-            .on("mouseout", function(d, i) {
-            	if (this == oldicon) return;
-		    	d3.select(this).attrs({
-		    		//fill: fillfunction,
-  					'font-size': radiusFunction,
-  				});
-
-  				//d3.select("#tooltip").remove();
-		    })
-		    .on("mousedown", function(d, i) {
-		    	selecticon(this, d, i);
-  			});
+        .on("mouseout", function(d, i) {
+        	if (this == oldicon) return;
+	    	d3.select(this).attrs({
+					'font-size': radiusFunction,
+				});
+	    })
+	    .on("mousedown", function(d, i) {
+	    	selecticon(this, d, i);
+			});
 
 	if (false){//!animateIt) {
 		g.selectAll("circle")
@@ -362,6 +353,47 @@ function drawPoints() {
 	} else if (false) {
 		animatePoints(enterAttributes, updateAttributes);
 	}
+}
+
+//TIMELINE
+d3.select("#timeline")
+    .on("input", timeline);
+
+function timeline() {
+	var val = this.value;
+
+	var selection = g.selectAll("text")
+		.data(data.filter(function(d) {
+	      	return d['Year founded'] <= val;
+	    }), function(d) {return d["School ID"]});
+
+	selection.enter()
+		.append('text')
+			.attrs(textAttributes)
+	    	.attr('font-size', radius)
+	    	.text(function(d) { return '\uf276' })
+	    .on("mouseover", function(d, i) {
+	    	if (this == oldicon) return;
+		    	d3.select(this).attrs({
+  					'font-size': function(d) {
+  						return radiusFunction(d) * 1.5;
+  					}
+  				});
+
+		    })
+        .on("mouseout", function(d, i) {
+        	if (this == oldicon) return;
+	    	d3.select(this).attrs({
+					'font-size': radiusFunction,
+				});
+	    })
+	    .on("mousedown", function(d, i) {
+	    	selecticon(this, d, i);
+			});
+
+	selection.exit().remove();
+
+	d3.select('#year').text(val);
 }
 
 function animatePoints(enterAttributes, updateAttributes) {
