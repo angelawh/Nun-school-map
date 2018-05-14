@@ -3,24 +3,25 @@
 
 // Key variables
 var animationKey;
-var timeKey;
-var latColKey = "latitude";
-var longColKey = "longitude";
-var pointColorKey = "city";
+var timeKey = "Year founded";
+var latColKey = "Latitude";
+var longColKey = "Longitude";
+var pointColorKey = "Order ID";
+var scaleFactor = 1;
 
 //animation variables
 var animateIt = false;
 
 // zoom scales
 var minZoomScale = 1;
-var maxZoomScale = 8;
+var maxZoomScale = 70;
 
 // Map strokes
 var countiesStrokeWidth = 0.2;
 var countiesStrokeColor = "#ffffff";
 var statesStrokeWidth = 1;
 var statesStrokeColor = "#ffffff";
-var nationStrokeWidth = .1;
+var nationStrokeWidth = .05;
 var nationStrokeColor = "#ffffff";
 
 var landColor = "#dddddd";
@@ -30,10 +31,12 @@ var drawCounties = true;
 var drawStates = true;
 
 // Point vars
-var radius = 5;
+var radius = 20;
+var minRadius = 1;
 var pointOutlineColor = "#000000";
-var pointOutlineWidth = .2;
-var pointOpacity = 1;
+var pointOutlineWidth = .5;
+var minPointOutlineWidth = .03;
+var pointOpacity = .8;
 
 var width = 960;
 var height = 600;
@@ -57,6 +60,8 @@ var nationOutline;
 var stateIdMap = d3.map();
 var countyIdMap = d3.map();
 var keys;
+var zoom;
+var oldicon = null;
 
 function generate() {
 	// CREATE AND PREPARE MAPS _______________________________________
@@ -90,7 +95,7 @@ function generate() {
 }
 
 function loadData(callback) {   
-	d3.json("/data/1000cities.json", function(d) { //d3.csv
+	d3.csv("/data/schools.csv", function(d) { 
 		data = d;
 	  	keys = Object.keys(d[0]);
 		$(".add-keynames").each(function() {
@@ -106,9 +111,10 @@ function loadData(callback) {
 }
 
 function makeVisualizations() { 
-	var zoom = d3.zoom().scaleExtent([minZoomScale, maxZoomScale])
-		.on("zoom", function() { g.attr("transform", d3.event.transform); });
-	svg.call(zoom);
+	zoom = d3.zoom().scaleExtent([minZoomScale, maxZoomScale])
+		.on("zoom", zoomIn);
+	svg.call(zoom)
+		.on("wheel.zoom", null);
 
 	if (data == null) {
 		d3.queue()
@@ -119,13 +125,125 @@ function makeVisualizations() {
 	}
 }
 
+function zoomIn() {
+	g.attr("transform", d3.event.transform);
+	scaleFactor = d3.event.transform.k;
+	/*g.selectAll("circle")
+		.attr('r', radiusFunction);*/
+	g.selectAll("text")
+		.attr('font-size', radiusFunction)
+		.attr('stroke-width', outlineFunction);
+}
+
+
+var radiusFunction = function(d) {
+	if (scaleFactor < 1.4) return radius;
+	var r = radius/(scaleFactor * 0.7);
+	if (r < minRadius) r = minRadius;
+	return r;
+};
+
+var outlineFunction = function(d) {
+	if (scaleFactor < 1.4) return pointOutlineWidth;
+	var o = pointOutlineWidth/(scaleFactor * 0.7);
+	if (o < minPointOutlineWidth) o = minPointOutlineWidth;
+	return o;
+};
+
+function selecticon(icon, data, i) {
+	if (icon == oldicon) return;
+	d3.select(icon).attrs({
+		'stroke-width': function(d) {
+			return outlineFunction(d) * 1.5;
+		},
+		'font-size': function(d) {
+			return radiusFunction(d) * 1.5;
+		},
+		stroke: "red",
+	});
+
+	if (oldicon != null) {
+		d3.select(oldicon).attrs({
+			//fill: fillfunction,
+			'stroke-width': outlineFunction,
+			'font-size': radiusFunction,
+			stroke: pointOutlineColor,
+		});
+	}
+	oldicon = icon;
+
+	seticontext(data, i);
+}
+
+function seticontext(d, i) {
+	console.log(d);
+	console.log(i);
+	var text = formtext(d);
+	d3.select('#maptitle').text(d["School name"]);
+	var map = d3.select('#mapinfo');
+	map.html("");
+
+
+	if (d["Founder/Foundress"] != "") 
+		map.append('p')
+			.text(d["Location"])
+			.append('p')
+			.text(d["Order Name"])
+			.append('p')
+			.text("Foundress: " + d["Founder/Foundress"])
+			.append('p')
+			.text("Type: " + d["Type of students taught"]);
+	else map.append('p')
+		.text(d["Location"])
+		.append('p')
+		.text(d["Order Name"])
+		.append('p')
+		.text("Type: " + d["Type of students taught"]);
+
+	map.append('p')
+		.text("Date school founded: " + d["Date school founded"])
+		.append('p')
+		.text("Date school ended: " + d["Year school ended [if applicable]"]);
+
+	map.append('p')
+		.text(d["School description"])
+
+	map.append('p')
+		.text("Sources: " + d["Sources"]);
+}
+
+function formtext(d) {
+	"xDate school founded"
+	"xFounder/Foundress"
+	"xLocation"
+	"xOrder Name"
+	"School description"
+	"Sources"
+	"Type of students taught"
+	"xYear founded"
+	"xYear school ended [if applicable]"
+	d["Sources"].replace(',', '\n')
+
+	var text = "Order: " + d["Order Name"] + '\n';
+	if (d["Founder/Foundress"] != "") 
+		text += "Foundress: " + d["Founder/Foundress"] + "\n\n";
+	else text += "\n";
+
+	text += "Date school founded: " + d["Date school founded"] 
+			+ "\nDate school ended: " 
+			+ d["Year school ended [if applicable]"] + "\n\n";
+
+
+
+	return text;
+}
 
 function drawPoints() {
 	var colorRange = d3.scaleOrdinal()
-		.domain(d3.map(data, function(d) {return (d[pointColorKey] + ", " + d['state'])}).keys()) // this may be wrong
-		.range(d3.schemeCategory20); //if more, do schemeCategory10
+		.domain([1,6,2,3,4,5])//d3.map(data, function(d) {return (d[pointColorKey])}).keys()) // this may be wrong
+		.range(d3.schemeSet1); //if more, do schemeCategory20
 
-	var fillfunction = function (d) { return colorRange(d[pointColorKey] + ", " + d['state']); };
+	var fillfunction = function (d) { return colorRange(d[pointColorKey]); };
 
  	var enterAttributes = {
 		cx: function (d) { 
@@ -139,13 +257,73 @@ function drawPoints() {
 		opacity: pointOpacity,
 		"stroke-width": pointOutlineWidth,
 		stroke: pointOutlineColor,
-		r: radius,
+		r: radiusFunction,
 		fill: fillfunction,
+	}
+
+	var textAttributes = {
+		x: function (d) { 
+			var coords = [d[longColKey], d[latColKey]];
+			return projection(coords)[0]; 
+		},
+		y: function (d) { 
+			var coords = [d[longColKey], d[latColKey]];
+			return projection(coords)[1];  
+		},
+		opacity: pointOpacity,
+		"stroke-width": pointOutlineWidth,
+		stroke: pointOutlineColor,
+		//r: radiusFunction,
+		fill: fillfunction,
+		'font-family': 'FontAwesome',
+		'font-size': function (d) { return d.size+'em'},
 	}
 
 	var updateAttributes = {};
 
-	if (!animateIt) {
+	g.selectAll("text")
+		.data(data)
+		.enter()
+		.append('text')
+			.attrs(textAttributes)
+	    	.attr('font-size', radius)
+	    	.text(function(d) { return '\uf276' })
+	    .on("mouseover", function(d, i) {
+	    	if (this == oldicon) return;
+		    	d3.select(this).attrs({
+		    		//fill: "orange",
+  					'font-size': function(d) {
+  						return radiusFunction(d) * 1.5;
+  					}
+  				});
+  				/*var xPosition = d3.mouse(this)[0];
+                var yPosition = d3.mouse(this)[1];
+
+                svg.append("text")
+                    .attr("id", "tooltip")
+                    .attr("x", xPosition)
+                    .attr("y", yPosition)
+                    .attr("text-anchor", "middle")
+                    .attr("font-family", "sans-serif")
+                    .attr("font-size", "11px")
+                    .attr("font-weight", "bold")
+                    .attr("fill", "black")
+                    //.text(d["Order Name"] + ", " + d['Location']);*/
+		    })
+            .on("mouseout", function(d, i) {
+            	if (this == oldicon) return;
+		    	d3.select(this).attrs({
+		    		//fill: fillfunction,
+  					'font-size': radiusFunction,
+  				});
+
+  				//d3.select("#tooltip").remove();
+		    })
+		    .on("mousedown", function(d, i) {
+		    	selecticon(this, d, i);
+  			});
+
+	if (false){//!animateIt) {
 		g.selectAll("circle")
 		    .data(data)
 		    .enter()
@@ -155,7 +333,9 @@ function drawPoints() {
 		    .on("mouseover", function(d, i) {
 		    	d3.select(this).attrs({
 		    		//fill: "orange",
-  					r: radius * 1.4
+  					r: function(d) {
+  						return radiusFunction(d) * 1.5;
+  					}
   				});
   				var xPosition = d3.mouse(this)[0];
                 var yPosition = d3.mouse(this)[1];
@@ -169,34 +349,19 @@ function drawPoints() {
                     .attr("font-size", "11px")
                     .attr("font-weight", "bold")
                     .attr("fill", "black")
-                    .text(d[pointColorKey] + ", " + d['state']);
+                    //.text(d["Order Name"] + ", " + d['Location']);
 		    })
             .on("mouseout", function(d, i) {
 		    	d3.select(this).attrs({
 		    		//fill: fillfunction,
-  					r: radius
+  					r: radiusFunction,
   				});
 
   				d3.select("#tooltip").remove();
 		    });
-	} else {
+	} else if (false) {
 		animatePoints(enterAttributes, updateAttributes);
 	}
-}
-
-function handleMouseOver(d, i) { 
-	// Use D3 to select element, change color and size
-	d3.select(this).attrs({
-  		
-	});
-}
-
-function handleMouseOut(d, i) {
-	// Use D3 to select element, change color back to normal
-	d3.select(this).attr({
-		fill: "black",
-		r: radius
-	});
 }
 
 function animatePoints(enterAttributes, updateAttributes) {
@@ -260,5 +425,15 @@ function getAndDrawUSforPoints() {
   	drawUSOutlines();
 	drawPoints();
 }
+
+
+// Add zoom
+d3.select('#zoom_in').on('click', function() {
+	zoom.scaleBy(svg, 1.5);
+});
+
+d3.select('#zoom_out').on('click', function() {
+	zoom.scaleBy(svg, 0.66);
+});
 
 generate();

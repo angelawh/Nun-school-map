@@ -91,12 +91,25 @@
 							<p class="text-black text-uppercase"></p>
 							<h2 class="text-black h1">MAP</h2>
 						</div>
-					<svg id="svg" width="100%" height="100%" viewBox="0 0 960 600"></svg>
+						<div class="legend1">
+						  <h3>Order Legend</h3>
+						  <div class="legend1"> <p class="country-name"><span class="key-dot order2"></span>Oblate Sisters of Providence</p> </div>
+					     <div class="legend1"> <p class="country-name"><span class="key-dot order1"></span>Sisters of Charity of St. Joseph</p> </div>
+					     <div class="legend1"> <p class="country-name"><span class="key-dot order3"></span>Sisters of Charity of Cincinnati</p> </div>
+					     <div class="legend1"> <p class="country-name"><span class="key-dot order4"></span>Sisters of Charity of St. Vincent de Paul of New York</p>
+					     <div class="legend1"> <p class="country-name"><span class="key-dot order5"></span>Sisters of Charity of St. Elizabeth</p>
+					     <div class="legend1"> <p class="country-name"><span class="key-dot order6"></span>Sisters of Charity of Seton Hill</p> </div>
+						</div>
+						<svg id="svg" width="100%" height="100%" viewBox="0 0 960 600"></svg>
+						<br>
+						<div class="btn-group" role="group" aria-label="zoom buttons">
+						  <button id="zoom_in" type="button" class="btn btn-light">+</button>
+						  <button id="zoom_out" type="button" class="btn btn-light">-</button>
+						</div>
 				</div>
 				<div>
-					<h4>Place</h4>
-					<p>
-						About the point you just clikced
+					<h4 id="maptitle">Click on the points to find out more information about each order.</h4>
+					<p id="mapinfo">
 					</p>
 				</div>
 			</div>

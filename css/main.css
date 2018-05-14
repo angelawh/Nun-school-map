@@ -1,3 +1,26 @@
+/*My CSS*/
+.country-name {
+    margin: 0 !important;
+}
+
+.key-dot {
+    display: inline-block;
+    height: 10px;
+    margin-right: .5em;
+    width: 10px;
+}
+
+.legend {
+    margin-right:20px;
+}
+
+.order1 { background: #E71919;}
+.order2 { background: #3B7CB5;}
+.order3 { background: #50AC51;}
+.order4 { background: #964FA6;}
+.order5 { background: #FF7C00;}
+.order6 { background: #FFFF31;}
+
 /*--------------------------- Color variations ----------------------*/
 /* Medium Layout: 1280px */
 /* Tablet Layout: 768px */
@@ -1097,6 +1120,7 @@ td, th {
 
 .banner-area {
   /*background: url(../img/banner.jpg) no-repeat center center/cover;*/
+  background: url(../img/background.jpg) no-repeat center center/cover;
 }
 
 .banner-area .overlay-bg {
