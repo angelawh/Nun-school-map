@@ -77,7 +77,12 @@
 					<div class="col-lg-10">
 						<div class="section-title">
 							<p class="text-uppercase text-center">About the project</p>
-							<p>This final project for REL 360 examines the legacies of two women: Elizabeth Ann Bayley Seton and Elizabeth Clarisse Lange. Seton founded the Sisters of Charity of St. Joseph in 1809 with a mission of educating the poor, which branched into multiple independent Sisters of Charity orders. Lange founded the Oblate Sisters of Providence in 1829 to educate black Catholic children. This page includes a map of schools established in the 19th century by the Oblate Sisters of Providence, the Sisters of Charity of St. Joseph, and the offshoots of the original Sisters of Charity. It also examines the importance of each woman's relationships and struggles with their male superiors and compares the impact of those relationships on each order. </p>
+							<p>This final project for REL 360 examines the legacies of two women: Elizabeth Ann Bayley Seton and Elizabeth Clarisse Lange. Seton founded the Sisters of Charity of St. Joseph in 1809 with a mission of educating the poor, which branched into multiple independent Sisters of Charity orders. Lange founded the Oblate Sisters of Providence in 1829 to educate black Catholic children. This page includes a map of schools established in the 19th century by the Oblate Sisters of Providence, the Sisters of Charity of St. Joseph, and the offshoots of the original Sisters of Charity of St. Joseph. It does not include other Sisters of Charity orders that do not trace their roots back to Seton. It also examines the importance of the relationships and struggles with their male superiors and compares the impact of those relationships on each order.  </p>
+						</div>
+						<div class="row justify-content-center text-center">
+							<div class="col-md-4"><img src="img/lange.jpg" width="100%">Photograph of Elizabeth Lange</div>
+
+							<div class="col-md-4"><img src="img/seton.jpg" width="100%">Portrait of Elizabeth Seton</div>
 						</div>
 					</div>
 				</div>
@@ -87,32 +92,33 @@
 		<!-- Start MAP Area -->
 		<section id="map" class="pb-150">
 			<div class="container">
-				<div class="row justify-content-center">
-						<div class="">
+				<div class="row">
+						<div class="justify-content-center">
 							<p class="text-black text-uppercase"></p>
 							<h2 class="text-black text-center h1">Map</h2>
-							<p class="text-black"><br>The map displays 38 schools, each established by one of the six orders listed below in the 19th century. While it is not an exhaustive list of all schools founded, it features many of the most prominent schools founded by each order during the century. Regarding the type of students each school taught, in many sources it was not mentioned. If the school is not explicitly mentioned as educating black students, it can be assumed it was only for white students. Information on the schools was found in a variety of sources: scholarly journals, summaries of Catholic surveys, Order websites, school websites, newspaper articles, and community archives.  </p>
+							<p class="text-black"><br>The map displays 38 schools, each established in the 19th century by one of the six orders listed below. While it is not an exhaustive list of all schools founded, it features many of the most prominent schools founded by each order during the century. In many cases, the type of students each school taught was not mentioned in sources. If the school is not explicitly mentioned as educating black students, it can be assumed it was only for white students. In addition, if the gender taught is unknown, it is likely an all-girls school, as the Catholic model for education was single-sex at the time and both orders' missions are particularly geared towards the education of girls. Information on the schools was found in a variety of sources: scholarly journals, summaries of Catholic surveys, Order websites, school websites, newspaper articles, and community archives. The location of each pin is as accurate as possible, ranging from the original building to the general city. </p>
 						</div>
 						<div class="legend1">
 						  <h3>Legend of Orders</h3>
 						  <div class="legend1"> <p class="country-name"><span class="key-dot order2"></span>Oblate Sisters of Providence</p> </div>
 					     <div class="legend1"> <p class="country-name"><span class="key-dot order1"></span>Sisters of Charity of St. Joseph</p> </div>
 					     <div class="legend1"> <p class="country-name"><span class="key-dot order3"></span>Sisters of Charity of Cincinnati</p> </div>
-					     <div class="legend1"> <p class="country-name"><span class="key-dot order4"></span>Sisters of Charity of St. Vincent de Paul of New York</p>
-					     <div class="legend1"> <p class="country-name"><span class="key-dot order5"></span>Sisters of Charity of St. Elizabeth</p>
+					     <div class="legend1"> <p class="country-name"><span class="key-dot order4"></span>Sisters of Charity of St. Vincent de Paul of New York</p> </div>
+					     <div class="legend1"> <p class="country-name"><span class="key-dot order5"></span>Sisters of Charity of St. Elizabeth</p> </div>
 					     <div class="legend1"> <p class="country-name"><span class="key-dot order6"></span>Sisters of Charity of Seton Hill</p> </div>
 						</div>
 						<svg id="svg" width="100%" height="100%" viewBox="0 0 960 600"></svg>
-						<br>
-						<div class="btn-group" role="group" aria-label="zoom buttons">
-						  <button id="zoom_in" type="button" class="btn btn-light">+</button>
-						  <button id="zoom_out" type="button" class="btn btn-light">-</button>
+						<div>
+							<div class="btn-group" role="group" aria-label="zoom buttons">
+							  <button id="zoom_in" type="button" class="btn btn-light">+</button>
+							  <button id="zoom_out" type="button" class="btn btn-light">-</button>
+							</div>
+							
+							<label><input id='timeline' style="width:240px;" type="range" min="1810" max="1899" step="1" value="1899"></label>
+							<span id="slideryear">&nbsp;&nbsp;Year:&nbsp;<span id="year">1899</span></span>
 						</div>
-						
-						<label><input id='timeline' style="width:240px;" type="range" min="1810" max="1899" step="1" value="1899"></label>
-						<span id="slideryear">Year: <span id="year">1899</span></span>
 				</div>
-				<div>
+				<div><br>
 					<h4 id="maptitle">Click on the pins to see information about each school.</h4>
 					<p id="mapinfo">
 					</p>
@@ -155,9 +161,17 @@ Examining selected correspondence between Elizabeth Seton and Archbishop Carroll
 						<div class="section-title">
 							<p class="text-uppercase text-center">Lange and Joubert</p>
 							<p class="text-black">
-The following essay examines the relationship of Elizabeth Lange and Father James Joubert as they found the Oblate Sisters of Providence and their first school, St. Frances Academy.
+The following essay examines Elizabeth Lange and the Oblate Sisters of Providence's relationship with Father James Joubert in the first years after the founding of the order.
 <br><br>
-Essay text...
+James Hector Nicholas Joubert de la Muraille was essential to the formation and survival of the Oblate Sisters of Providence. His support and leadership included gaining the Sisters recognition from both the Papacy and local diocese and helping them establish their regulations and community standards. It is difficult to explore his relationship with any individual Sister in depth due to the dearth of diaries or letters written by any Sister (Morrow, <i>Persons of Color</i> 10) and due to the fact that Joubert himself kept the order-wide diary, or annal, for the first decade of the Oblates existence (14). Instead, this essay explores his relationship with the Oblates as he helps them gain recognition as a trailblazing community of black women religious. 
+<br><br>
+From the beginning, Joubert's perseverance allowed the community to become established. From a noble family in France, Joubert became a tax official in St. Domingue before eventually emigrating to Baltimore after the Haitian revolution (39). After entering the priesthood, he realized his desire to open a religious school for black immigrants, and in 1827 asked the current archbishop Abromse Marecal. Marecal approved of the idea but was against its direct enactment purportedly due to lack of funding. After his death the following year, the new Archbishop James Whitfield approved of the proposal (4). After the approval, Joubert approached Lange, learned of her desire to form a religious order, and helped found both the order and a school (15). Without Joubert's perseverance and perhaps a lucky change of leadership, he would have never approached Lange and helped found the order. 
+<br><br>
+Joubert's relationship with the Oblate Sisters shows his ability to allow the Sisters to exercise their own authority in the community. When Reverend Louis Deulol, the head of St. Mary's Seminary, asked the Sisters to help serve in the seminary in a domestic role, Lange allowed the Sisters to formulate their own conditions (140), rather than attempting to do so himself. His encouragement to the sisters was notable, reassuring them to "put their confidence in God; that until now their work seemed good, so they must not stop because of the judgment of men who often judge things through their passions and prejudices" (139). His remark to ignore the judgment of men seems particularly inspiring and shows his ability to look beyond traditional gender roles. Yet, Joubert still prescribed to some of the sexist and racist tendencies of the time, calling the Sisters "poor girls" or "colored girls" in his writings (139), or encouraging Lange to be less strict and more motherly in her leadership, perhaps interpreting her strong qualities as unacceptable in a woman (23). Despite this, his encouragement and deference to their authority allowed the Sisters to gain confidence and leadership skills of their own.
+<br><br>
+Perhaps Joubert's most important contribution to the Oblates was his securing their acknowledgment by both the local diocese and Rome. The Oblates originally only made simple annual promises rather than the annual vows other orders made, such as the Sisters of Charity (51). Joubert intended to increase their recognition through petitioning to Rome, soliciting the help of his friend. On October 2, 1831, the Papacy granted the Oblates certain privileges in a letter of recognition of the order. While this differed from formal Papal acknowledgment, it was enough to cause Baltimore Archbishop Whitfield to declare that "the thing is more serious" and allow sisters to say simple vows (53-4, 56). Thus through Joubert's insistence on this Papal recognition, he also secured recognition from the diocese. After this, Joubert also helped secure other formal privileges for the sisters to continue to legitimize the order.
+<br><br>
+The importance of Joubert in helping maintain recognition for the Oblates is clearly seen upon his death. Joubert's declining health prevented him from maintaining his duties to the Sisters, such as preparing the Mass for their chapel. This forced the Sisters to go out to Mass, as no priest was available to celebrate with them in their own chapel, which became a recurring issue after his death. A month before his death on St. Benedict's Feast Day, one of the Oblates' patron saints, they barely had a Mass. While it was procured by Reverend Deulol, he did not attend the ceremony. In comparison, Deulol sang at their High Mass on that feast day for the previous eight years (174-6). Without the influence and support of Joubert, Deulol would not attend and it was difficult to get priests to procure Mass in their chapel. The recognition of the diocese began to decline even before his death and continued well after, as the Oblates struggled to maintain stability for many years. Thus, while Joubert's support and leadership helped the Oblates become established in their first 13 years of their existence, his presence seemed crucial in helping maintain that recognition which was lost immediately after his passing.
 							</p>
 						</div>
 					</div>
@@ -167,7 +181,21 @@ Essay text...
 					<div class="col-lg-10">
 						<div class="section-title">
 							<p class="text-uppercase text-center">Comparison</p>
-							<p class="text-black"> Nice 3 page paper! </p>
+							<p class="text-black"> 
+Both the Sisters of Charity of St. Joseph and the Oblate Sisters of Providence relied on the support of their male superiors and the general diocese to remain successful. All communities of women religious were required to have a male superior at the time (Morrow, <i>Persons of Color</i> 17), and thus each order's relationship with their superior was crucial to maintain success. While both orders received support that helped their communities grow and survive, a comparison of the communities show that the support was often unequal. The two orders overlapped particularly in their Baltimore experiences and occasionally in their missions as well. A comparison of their interactions shows their different experiences were likely due to a variety of factors, most notably racism, the size of white versus black constituencies, and luck or circumstance.
+<br><br>
+The two communities were treated differently by the Baltimore diocese on many occasions. From their conception, the Oblate Sisters of Providence struggled to maintain stable housing. Exacerbating this problem was the Oblates lack of incorporation in the Church, which prevented them from legally holding property as a group. While the Sisters of Charity and all other white sisterhoods in the diocese were quickly incorporated, the Oblates remained unincorporated until 1867. This is particularly notable considering at least 4 black Protestant denominations were incorporated well before the Oblates, highlighting it was a particular issue in the Catholic community and leadership (147). 
+<br><br>
+The comparison in recognition likely had many factors. The sisters' distinct missions were viewed differently by society: the Sisters of Charity were viewed as providing a social good by educating poor white children, whereas the Oblates goal of educating black Catholic children was not. A portion of society was even against any education of black people, certainly adding to the resistance against the Oblates (17). Also, from a practical standpoint, the white Catholic community was significantly larger than the black Catholic community. In 1865 there were 16,000 black Catholics nationwide compared to 1.3 million white Catholics in 1860. This not only impacted the difference in sisterhood membership, as in 1850 when the Oblates had around 30 members compared to the Sisters of Charity's 680 members (133), but also impacted the motivation for the Church authorities to support a sisterhood serving a considerably smaller constituency. While numbers may have had an impact, the Oblates mission simply had less societal value at the time, which likely had a larger effect on the Church authorities' opinions.
+<br><br>
+In contrast, the Sisters of Charity were both able to hold property legally and given ample financial support: a benefactor donated $6961 to purchase their original property (McNeil, "Historical Perspectives 294") and they maintained support from benefactors such as the Italian Filicchi family who helped finance the construction of their first house (McNeil, "Rose" 37). The Oblates often struggled financially and lacked any support from either benefactors or the diocese. The diocese's financial support amounted to an annual $5 gift with occasional one-time gifts of larger sums (Morrow, <i>Persons of Color</i> 134). While the difference in benefactors is partially due to circumstance, such as the fact that Seton was good friends with the Filicchi family, race likely impacted the opportunity for the Oblates to earn such benefactors. Outside of financial support, male authorities often unequally assisted the Sisters of Charity in other ways. For example, Sulpician Father Chanche refused to help the Oblates, but offered assistance in forming an academic course of study for the Sisters of Charity's St. Josephs Academy. Thus, discrimination between orders occurred throughout their interactions with the Baltimore diocese. 
+<br><br>
+Their differing treatment extended beyond the Baltimore authorities to the Baltimore community. When the 1832 cholera epidemic broke out in Baltimore, the Trustees of the Bureau of the Poor asked the Sisters of Charity to help nurse the sick. When they had increased need, the Trustees then reached out to the Oblates (71). At first glance, it may seem as though the Trustees desired the white Sisters of Charity over the Oblates, but they in fact did not know about the Oblates existence until the Sisters of Charity informed them. While the Trustees' lack of knowledge of the Oblates does show an issue with the Oblates' lack of recognition in the community, they did not hesitate to reach out for the Oblates help. After the epidemic, the Sisters of Charity garnered significant public recognition for their works, whereas the Oblates received none (147). This was likely due to both race and the fact that the Sisters of Providence were significantly larger, nursed in more places, and nursed more people (149).
+<br><br>
+A final example comes with the orders' experiences in missions outside of the Baltimore and Maryland community. In both July 1833 and June 1834, clergymen from Mobile, Alabama proposed that the Oblates begin a mission to the large black population there. While the Oblates responded enthusiastically to the proposal, the Mobile bishop, Michael Portier, neglected to take action (72). Without the crucial support of the Mobile leadership, the Oblates never began the proposed mission. Later in the 1840s when Bishop Portier desired to open a school for black girls, rather than contacting the previously proposed Oblates, he asked the Sisters of Charity of St. Joseph to open the school (72). In this instance, Bishop Portier specifically chose the Sisters of Charity over the Oblate Sisters, even though the latter's mission was to teach black girls. While his exact reasons are unknown, the race of the Oblates was likely a factor in his decision. Garnering the support of the authorities in other cities was a requirement for both sisterhoods to begin schools. The Sisters of Charity's larger spread of schools was likely formed from decisions similar to that of Bishop Portier, who chose the large, white, established sisterhood over the fledging black sisterhood.
+<br><br>
+While both orders struggled in defining their role as an active community of religious women, the Oblate Sisters of Providence had the additional challenge of establishing themselves as "persons of color and religious at the same time" (27). This extra responsibility likely contributed to many of the differences in the orders' experiences, which ranged from more explicit racism to a lack of connections caused by the racist societal structure. Through the comparison, it is clear that being a religious woman and being a religious woman of color were two separate struggles within the Catholic Church community.  
+							</p>
 						</div>
 					</div>
 				</div>
@@ -186,15 +214,15 @@ Essay text...
 						</div>
 						<p>
 							<br>
-							"Academy of Saint Elizabeth: History." Academy of Saint Elizabeth, <a href="https://www.aosenj.org/apps/pages/index.jsp?uREC_ID=408990&type=d&pREC_ID=891527">https://www.aosenj.org/apps/pages/index.jsp?uREC_ID=408990&type=d&pREC_ID=891527</a>.
+							"Academy of Saint Elizabeth: History." <i>Academy of Saint Elizabeth</i>, <a href="https://www.aosenj.org/apps/pages/index.jsp?uREC_ID=408990&type=d&pREC_ID=891527">https://www.aosenj.org/apps/pages/index.jsp?uREC_ID=408990&type=d&pREC_ID=891527</a>.
 							<br><br>
-							"A Short History of the Sisters of Charity." Emmitsburg Area Historical Society, www.emmitsburg.net/archive_list/articles/history/stories/sisters_of_charity.htm.
+							"A Short History of the Sisters of Charity." <i>Emmitsburg Area Historical Society</i>, www.emmitsburg.net/archive_list/articles/history/stories/sisters_of_charity.htm.
 							<br><br>
-							"About Seton: Mission & History." Seton High School, www.setoncincinnati.org/about-seton/mission-history/.
+							"About Seton: Mission & History." <i>Seton High School</i>, www.setoncincinnati.org/about-seton/mission-history/.
 							<br><br>
-							Alma, Maria. "Foundations of Catholic Sisterhoods in United States 1850 (CONTIUNED)." Records of the American Catholic Historical Society of Philadelphia, vol. 52, no. 3, 1941, pp. 174-184. JSTOR, JSTOR, www.jstor.org/stable/44209396.
+							Alma, Maria. "Foundations of Catholic Sisterhoods in United States 1850 (CONTIUNED)." <i>Records of the American Catholic Historical Society of Philadelphia</i>, vol. 52, no. 3, 1941, pp. 174-184. JSTOR, JSTOR, www.jstor.org/stable/44209396.
 							<br><br>
-							Alma, Maria. "Foundations of Catholic Sisterhoods in United States 1850." Records of the American Catholic Historical Society of Philadelphia, vol. 52, no. 4, 1941, pp. 219-243. JSTOR, JSTOR, www.jstor.org/stable/44209404.
+							Alma, Maria. "Foundations of Catholic Sisterhoods in United States 1850." <i>Records of the American Catholic Historical Society of Philadelphia</i>, vol. 52, no. 4, 1941, pp. 219-243. JSTOR, JSTOR, www.jstor.org/stable/44209404.
 							<br><br>
 							Alma, Maria. "Foundations of Catholic Sisterhoods in United States 1850." Records of the American Catholic Historical Society of Philadelphia, vol. 53, no. 2, 1942, pp. 96-110. JSTOR, JSTOR, www.jstor.org/stable/44209845.
 							<br><br>
@@ -274,8 +302,15 @@ Essay text...
 							<br><br>
 							Younkman, Tim. "St. James Elementary School Celebrates 140th Year of Education in Bay City." MLive, Bay City Times, 10 Oct. 2013, www.mlive.com/news/bay-city/index.ssf/2013/10/st_james_school_celebrates_140.html.
 							<br><br>
-							Background image at top comes from "Sisters of Charity Timeline," https://i2.wp.com/www.scny.org/wp-content/uploads/2014/06/McGowns-Pass.jpg?w=612&ssl=1
+							<b>Images</b>
 							<br><br>
+							Background image at top is of the first Academy of Mount Saint Vincent in New York City and comes from "Sisters of Charity Timeline," https://i2.wp.com/www.scny.org/wp-content/uploads/2014/06/McGowns-Pass.jpg?w=612&ssl=1
+							<br><br>
+							Image of Elizabeth Seton at the top comes from the Seton Shrine website article "The Life of Saint Elizabeth Ann Seton" https://setonshrine.org/elizabeth-ann-seton/
+							<br><br>
+							Image of Elizabeth Lange at the top comes from her Wikipedia page https://en.wikipedia.org/wiki/Mother_Mary_Lange
+							<br><br>
+
 							<b>List of Letters in the Seton and Carroll Essay</b>
 							<ol>
 								<li>1. To Archbishop John Carroll, August 6, 1809 (Seton 76-9)</li>

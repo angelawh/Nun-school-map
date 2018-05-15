@@ -24,7 +24,7 @@ var nationStrokeWidth = .05;
 var nationStrokeColor = "#ffffff";
 
 var landColor = "#dddddd";
-var waterColor = "#ffffff";
+var waterColor = "#f4f7ff";
 
 var drawCounties = true;
 var drawStates = true;
@@ -61,7 +61,8 @@ var countyIdMap = d3.map();
 var keys;
 var zoom;
 var orders;
-var oldicon = null;
+var oldiconid = null;
+var oldiconyear = null;
 
 function generate() {
 	// CREATE AND PREPARE MAPS _______________________________________
@@ -141,8 +142,8 @@ function zoomIn() {
 	g.selectAll("text")
 		.attr('font-size', radiusFunction)
 		.attr('stroke-width', outlineFunction);
-	if (oldicon == null) return;
-	d3.select(oldicon).attrs({
+	if (oldiconid == null || oldiconyear > +d3.select('#year').text()) return;
+	d3.select("#id" + oldiconid).attrs({
 		'stroke-width': function(d) {
 			return outlineFunction(d) * 1.5;
 		},
@@ -150,6 +151,7 @@ function zoomIn() {
 			return radiusFunction(d) * 1.5;
 		},
 		stroke: "red",
+		opacity: 1,
 	});
 }
 
@@ -169,8 +171,8 @@ var outlineFunction = function(d) {
 };
 
 function selecticon(icon, data, i) {
-	if (icon == oldicon) return;
-	d3.select(icon).attrs({
+	if (data["School ID"] == oldiconid) return;
+	d3.select(("#id" + data["School ID"])).attrs({
 		'stroke-width': function(d) {
 			return outlineFunction(d) * 1.5;
 		},
@@ -178,17 +180,20 @@ function selecticon(icon, data, i) {
 			return radiusFunction(d) * 1.5;
 		},
 		stroke: "red",
+		opacity: 1,
 	});
 
-	if (oldicon != null) {
-		d3.select(oldicon).attrs({
+	if (oldiconid != null && oldiconyear <= +d3.select('#year').text()) {
+		d3.select("#id" + oldiconid).attrs({
 			//fill: fillfunction,
 			'stroke-width': outlineFunction,
 			'font-size': radiusFunction,
 			stroke: pointOutlineColor,
+			opacity: pointOpacity,
 		});
 	}
-	oldicon = icon;
+	oldiconid = data["School ID"];
+	oldiconyear = data["Year founded"];
 
 	seticontext(data, i);
 }
@@ -218,7 +223,7 @@ function seticontext(d, i) {
 	map.append('p')
 		.text("Date school founded: " + d["Date school founded"])
 		.append('p')
-		.text("Date school ended: " + d["Year school ended [if applicable]"]);
+		.text("Date school closed: " + d["Year school ended [if applicable]"]);
 
 	map.append('p')
 		.text(d["School description"])
@@ -263,7 +268,7 @@ function drawPoints() {
 			return projection(coords)[1];  
 		},
 		opacity: pointOpacity,
-		"stroke-width": pointOutlineWidth,
+		"stroke-width": outlineFunction,
 		stroke: pointOutlineColor,
 		r: radiusFunction,
 		fill: fillfunction,
@@ -279,11 +284,14 @@ function drawPoints() {
 			return projection(coords)[1];  
 		},
 		opacity: pointOpacity,
-		"stroke-width": pointOutlineWidth,
+		"stroke-width": outlineFunction,
 		stroke: pointOutlineColor,
 		fill: fillfunction,
 		'font-family': 'FontAwesome',
-		'font-size': function (d) { return d.size+'em'},
+		'font-size': radiusFunction,
+		id: function(d) {
+			return "id" + d["School ID"];
+		}
 	}
 
 	var updateAttributes = {};
@@ -293,10 +301,9 @@ function drawPoints() {
 		.enter()
 		.append('text')
 			.attrs(textAttributes)
-	    	.attr('font-size', radius)
 	    	.text(function(d) { return '\uf276' })
 	    .on("mouseover", function(d, i) {
-	    	if (this == oldicon) return;
+	    	if (d["School ID"] == oldiconid) return;
 		    	d3.select(this).attrs({
   					'font-size': function(d) {
   						return radiusFunction(d) * 1.5;
@@ -305,7 +312,7 @@ function drawPoints() {
 
 		    })
         .on("mouseout", function(d, i) {
-        	if (this == oldicon) return;
+        	if (d["School ID"] == oldiconid) return;
 	    	d3.select(this).attrs({
 					'font-size': radiusFunction,
 				});
@@ -370,11 +377,11 @@ function timeline() {
 	selection.enter()
 		.append('text')
 			.attrs(textAttributes)
-	    	.attr('font-size', radius)
 	    	.text(function(d) { return '\uf276' })
 	    .on("mouseover", function(d, i) {
-	    	if (this == oldicon) return;
+	    	if (d["School ID"] == oldiconid) return;
 		    	d3.select(this).attrs({
+		    		opacity: .9,
   					'font-size': function(d) {
   						return radiusFunction(d) * 1.5;
   					}
@@ -382,9 +389,10 @@ function timeline() {
 
 		    })
         .on("mouseout", function(d, i) {
-        	if (this == oldicon) return;
+        	if (d["School ID"] == oldiconid) return;
 	    	d3.select(this).attrs({
 					'font-size': radiusFunction,
+					opacity: pointOpacity,
 				});
 	    })
 	    .on("mousedown", function(d, i) {
@@ -394,6 +402,18 @@ function timeline() {
 	selection.exit().remove();
 
 	d3.select('#year').text(val);
+
+	if (oldiconid == null || oldiconyear > val) return;
+	d3.select("#id" + oldiconid).attrs({
+		'stroke-width': function(d) {
+			return outlineFunction(d) * 1.5;
+		},
+		'font-size': function(d) {
+			return radiusFunction(d) * 1.5;
+		},
+		stroke: "red",
+		opacity: 1,
+	});
 }
 
 function animatePoints(enterAttributes, updateAttributes) {
